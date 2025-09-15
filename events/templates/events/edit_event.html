@@ -1,0 +1,16 @@
+{% extends 'events/club_dashboard.html' %}
+{% block title %}Edit Event{% endblock %}
+
+{% block content %}
+<br> <br>
+<div class="container mt-5"  style="width: 60%;">
+    <h2>Edit Event: {{ event.title }}</h2>
+    <form method="post" enctype="multipart/form-data" >
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </form> <br>
+    <a href="{% url 'club_dashboard' %}" ><button type="submit" class="btn btn-primary">Cancel</button></a>
+    <br> <br>
+</div>
+{% endblock %}

@@ -1,0 +1,102 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Club Registration - Smart Workflow Club</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSS Files -->
+    <link href="{% static 'extras/css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'extras/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'extras/css/font-awesome.css' %}" rel="stylesheet">
+    <link href="{% static 'extras/css/responsive.css' %}" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Belgrano|Dosis|Roboto" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #dfdfdf;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .form-container {
+            max-width: 500px;
+            margin: 120px auto 40px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+            /* margin-bottom: 40px; */
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .form-control {
+            margin-bottom: 15px;
+            padding: 10px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+        
+        
+    </style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<div id="menu" class="header-menu fixed">
+    <div class="box">
+        <div class="row">
+            <nav role="navigation" class="col-sm-12">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <span class="navbar-brand logo">Smart Workflow Club</span>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li ><a href="{% url 'club_dashboard' %}">Home</a></li>
+                        <li ><a href="{% url 'add_event' %}">Add Events</a></li>
+                        <li ><a href="{% url 'manage_event' %}">Manage Events</a></li>
+                        <li ><a href="{% url 'club_view_feedbacks' %}">Feedbacks</a></li>
+                        <li><a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>
+<br><br>
+
+
+{% block content %}
+{% endblock content %}
+
+
+
+</body>
+</html>

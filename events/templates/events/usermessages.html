@@ -1,0 +1,123 @@
+{% extends 'events/base.html' %}
+
+{% block title %}Contact Messages{% endblock %}
+
+{% block content %}
+
+<style>
+    /* General Styling */
+.container {
+  max-width: 1200px;
+}
+
+/* Title Styling */
+h2 {
+  font-family: 'Roboto', sans-serif;
+  color: #007bff;
+  font-weight: 600;
+  font-size: 32px;
+  letter-spacing: 1px;
+  margin-bottom: 30px;
+}
+
+/* Message Cards Styling */
+.message-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.message-card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.message-card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Message Header */
+.message-header {
+  background-color: #007bff;
+  color: white;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.message-header-left h5 {
+  font-size: 18px;
+  margin: 0;
+  font-weight: 500;
+}
+
+.message-header-left small {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.message-date {
+  font-size: 14px;
+  opacity: 0.7;
+  text-align: right;
+}
+
+/* Message Body */
+.message-body {
+  padding: 20px;
+  background-color: #f7f7f7;
+  color: #333;
+  font-size: 16px;
+}
+
+.message-body p {
+  white-space: pre-wrap;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Empty State Styling */
+.alert-info {
+  padding: 20px;
+  font-size: 18px;
+  border-radius: 10px;
+  background-color: #f1f8ff;
+  color: #333;
+  font-weight: 500;
+}
+
+</style>
+
+<br><br><br><br>
+
+<div class="container mt-5 mb-5">
+  <h2 class="mb-4 text-center">📨 User Enquiries</h2>
+
+  {% if messages %}
+    <div class="message-cards">
+      {% for msg in messages %}
+        <div class="message-card">
+          <div class="message-header">
+            <div class="message-header-left">
+              <h5 style="color: white;" >{{ msg.name }}</h5>
+              <small>{{ msg.email }}</small>
+            </div>
+            <small class="message-date">{{ msg.submitted_at|date:"M d, Y - H:i A" }}</small>
+          </div>
+          <div class="message-body">
+            <p>{{ msg.message }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="alert alert-info text-center mt-5" role="alert">
+      No contact messages found.
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,147 @@
+{% extends 'events/club_dashboard.html' %}
+{% load custom_filters %}
+
+{% block content %}
+<style>
+    .event-card {
+        margin-bottom: 30px;
+        border: 1px solid #ddd;
+        border-radius: 15px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .event-card-header {
+        background-color: #007bff;
+        color: #fff;
+        font-size: 1.25rem;
+        font-weight: bold;
+        padding: 15px;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+    }
+
+    .event-card-body {
+        padding: 15px;
+    }
+
+    .btn-view-feedback {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 5px;
+        margin-top: 10px;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .btn-view-feedback:hover {
+        background-color: #0056b3;
+    }
+
+    .modal-overlay {
+        display: none;
+        position: fixed;
+        z-index: 10000;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.6);
+        justify-content: center;
+        align-items: center;
+    }
+
+    .modal-overlay:target {
+        display: flex;
+    }
+
+    .modal-box {
+        background-color: white;
+        border-radius: 10px;
+        max-width: 800px;
+        width: 90%;
+        padding: 20px;
+        position: relative;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+
+    .close-modal {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 1.5rem;
+        text-decoration: none;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .star-rating {
+        color: #f39c12;
+        margin-bottom: 8px;
+    }
+
+    .list-group-item {
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 10px;
+    }
+</style>
+
+<br><br><br><br>
+<div class="container mt-5">
+    <h2 class="mb-4">Event Feedbacks</h2>
+
+    <div class="row">
+        {% for pair in events_feedback_list %}
+            {% with event=pair.event feedback_list=pair.feedback_list %}
+                <div class="col-md-4">
+                    <div class="card event-card shadow">
+                        <div class="card-header event-card-header">
+                            {{ event.title }}
+                        </div>
+                        <div class="card-body event-card-body">
+                            <p><strong>Date:</strong> {{ event.date|date:"M d, Y" }}</p>
+                            <p>{{ event.description|truncatewords:12 }}</p>
+                            <a href="#modal{{ event.id }}" class="btn-view-feedback"  style="width: 100%; text-align: center;" >View Feedbacks</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CSS Modal -->
+                <div id="modal{{ event.id }}" class="modal-overlay">
+                    <div class="modal-box">
+                       
+                        <a href="#" class="close-modal">&times;</a>
+                        <h5>Feedbacks for {{ event.title }}</h5>
+                        <hr>
+                        {% if feedback_list %}
+                            <div class="list-group">
+                                {% for feedback in feedback_list %}
+                                    <div class="list-group-item mb-3 shadow-sm rounded">
+                                        <div class="d-flex justify-content-between">
+                                            <h5>{{ feedback.user_name }}</h5>
+                                            <!-- <span class="badge bg-warning">{{ feedback.rating }} Stars</span> -->
+                                        </div>
+                                        <div class="star-rating text-warning">
+                                            {% for i in feedback.rating|range_filter %}
+                                                <span>&#9733;</span>
+                                            {% endfor %}
+                                        </div>
+                                        <p class="mb-1">{{ feedback.comment }}</p>
+                                        <small class="text-muted">Submitted: {{ feedback.submitted_at|date:"M d, Y H:i" }}</small>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <p>No feedbacks for this event.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endwith %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

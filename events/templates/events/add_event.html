@@ -1,0 +1,13 @@
+{% extends "events/club_dashboard.html" %}
+{% block content %}
+<br> <br>
+<div class="container mt-4" style="width: 60%; border: 1px black;" >
+    <h2>Add New Event</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Submit Event</button>
+    </form>
+    <br> <br>
+</div>
+{% endblock content %}

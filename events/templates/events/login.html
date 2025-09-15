@@ -1,0 +1,122 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Event - Login</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="Event Management - Login">
+
+    <!--== CSS Files ==-->
+    <link href="{% static 'extras/css/bootstrap.css' %}" rel="stylesheet" media="screen">
+    <link href="{% static 'extras/css/style.css' %}" rel="stylesheet" media="screen">
+    <link href="{% static 'extras/css/font-awesome.css' %}" rel="stylesheet" media="screen">
+    <link href="{% static 'extras/css/owl.carousel.css' %}" rel="stylesheet" media="screen">
+    <link href="{% static 'extras/css/flexslider.css' %}" rel="stylesheet" media="screen">
+    <link href="{% static 'extras/css/fancySelect.css' %}" rel="stylesheet" media="screen">
+    <link href="{% static 'extras/css/responsive.css' %}" rel="stylesheet" media="screen">
+
+    <!--== Google Fonts ==-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Belgrano' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Dosis' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+
+    <style>
+        body {
+            background-color: #f4f7fa;
+            font-family: 'Open Sans', sans-serif;
+        }
+p>input{
+    border: rgb(115, 115, 115) solid;
+}
+        .login-container {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-control {
+            border-radius: 4px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!--== Navbar ==-->
+    <div id="menu" class="header-menu fixed">
+        <div class="box">
+            <div class="row">
+                <nav role="navigation" class="col-sm-12">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+
+                        <!--== Logo ==-->
+                        <span class="navbar-brand logo">
+                            Smart Workflow Club
+                        </span>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="current"><a href="{% url 'index' %}">Home</a></li>
+                            <!-- <li><a href="#about">About us</a></li>
+                            <li><a href="#contact">Contact</a></li> -->
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+<br><br><br>
+    <!--== Login Form ==-->
+    <div class="login-container">
+        <h2>Login</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Login</button> 
+        </form> <br>
+        <a href="{% url 'club_register' %}" style="color: white;" >
+        <button class="btn btn-primary" >Register as Club/Coordinator</button>
+        </a>
+    </div>
+
+</body>
+
+</html>
